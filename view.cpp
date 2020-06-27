@@ -46,8 +46,9 @@ void View::paintEvent(QPaintEvent *event)
     QPoint points2[3] = {QPoint(w*0.9+d, h*0.8), QPoint(w*0.9, h*0.8+d*0.5), QPoint(w*0.9, h*0.8-d*0.5) };
     painter.drawPolygon(points2, 3);
 
-    paintRect(painter, rect1, v1, v1>v2);           // нарисовать левый бак и клапан
-    paintRect(painter, rect2, v2, v2>v1);           // нарисовать правый бак и клапан
+    double eps = 1e-14;                             // заданный допуск сравнения
+    paintRect(painter, rect1, v1, v1>v2+eps);       // нарисовать левый бак и клапан
+    paintRect(painter, rect2, v2, v2>v1+eps);       // нарисовать правый бак и клапан
 
     event->accept();
 }
